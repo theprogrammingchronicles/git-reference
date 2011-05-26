@@ -151,17 +151,22 @@ layout: reference
       <a target="new" href="http://progit.org/book/ch2-2.html#checking_the_status_of_your_files">book</a>
     </span>
     <a name="status">git status</a>
-    <span class="desc">view the status of your files in the working directory and staging area</span>
+    <span class="desc">muestra el estado de los ficheros en el directorio de trabajo
+    y &aacute;rea de montaje</span>
   </h2>
 
   <div class="block">
-    <p>As you saw in the <code>git add</code> section, in order to see what the
-    status of your staging area is compared to the code in your working 
-    directory, you can run the <code>git status</code> command. I demonstrated
-    using it with the <code>-s</code> option, which gives you short output.
-    Without that flag, the <code>git status</code> command will give you more
-    context and hints.  Here is the same status output with and without the 
-    <code>-s</code>.  The short output looks like this:
+    <p>Como vimos en el apartado  <code>git add</code>,
+      para ver el estado de nuestros staging area (area de montaje) comparado con
+      el c&oacute;digo en nuestro directorio de trabajo (working
+      directory), podemos ejecutar el comnado  <code>git
+      status</code>.
+      Lo hemos mostrado con la opci&oacute;n  <code>-s</code>,
+      que nos proporciona una salida resumida. Sin este flag, el comando  <code>git
+      status</code> nos mostrar&aacute; m&aacute;s informac&iacute;&oacute;n en contexto y algunos consejos.
+      Veamos las diferencias entre del informe de estado pero
+      sin el  
+    <code>-s</code>.  La salida de formato resumido tiene la siguiente apariencia:
     </p>
 
 <pre>
@@ -170,9 +175,9 @@ layout: reference
 <span class="green">A</span>  hello.rb
 </pre>
 
-    Where the same status with the long output looks like this:
+    Mientras que la misma informaci&oacute;n en formato largo tiene la siguiente apariencia:
 
-<pre>
+    <pre>
 <b>$ git status</b>
 # On branch master
 #
@@ -192,13 +197,14 @@ layout: reference
 #
 </pre>
 
-    <p>You can easily see how much more compact the short output is, but the
-    long output has useful tips and hints as to what commands you may want to 
-    use next.
+    <p>Podemos observar que la salida resumida es bastante m&aacute;s compacta, en cambio
+      la salida en formato largo ofrece consejos y pistas &uacute;tiles que podr&iacute;amos querer
+      usar a continuaci&oacute;n.
     </p>
 
-    <p>Git will also tell you about files that were deleted since your last 
-    commit or files that were modified or staged since your last commit.</p>
+    <p>Git tambi&eacute;n nos informar&aacute; sobre ficheros que fueron borrados desde el &uacute;ltimo
+      commit o ficheros que fueron modificados o a&ntilde;adidos al stage desde nuestro
+      &uacute;ltimo commit.</p>
 
 <pre>
 <b>$ git status -s</b>
@@ -206,23 +212,23 @@ layout: reference
  <span class="red">D</span> hello.rb
 </pre>
 
-    You can see there are two columns in the short status output.  The first
-    column is for the staging area, the second is for the working directory.
-    So for example, if you have the README file staged and then you modify
-    it again without running <code>git add</code> a second time, you'll see 
-    this:
+    Podemos ver que hay dos columnas en el formato corto. La primera columna es para
+    el  staging area, la segunda es para el  working directory.
+    A si que si por ejemplo tenemos el fichero README
+    en el staging area y entonces lo modificamos de nuevo sin ejectuar  <code>git
+    add</code> una segunda vez, veremos lo siguiente:
 
-<pre>
+    <pre>
 <b>$ git status -s</b>
 <span class="green">M</span><span class="red">M</span> README
  <span class="red">D</span> hello.rb
 </pre>
 
     <p class="nutshell">
-    <strong>In a nutshell</strong>, 
-    you run <code>git status</code> to see if anything has been modified 
-    and/or staged since your last commit so you can decide if you want to
-    commit a new snapshot and what will be recorded in it.
+    <strong>En resumidas cuentas</strong>, 
+    ejecutamos  <code>git status</code> para ver si algo ha sido modificado y/o a&ntilde;adido
+    al staging area desde el &uacute;ltimo commit, para que podamos decidir si queremos
+    hacer el commit para crear un nuevo snapshot y que grabaremos en el.
     </p>
 
   </div>
