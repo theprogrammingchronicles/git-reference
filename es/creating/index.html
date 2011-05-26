@@ -1,23 +1,22 @@
 ---
 layout: reference
 ---
-
 <div class="box">
-  <h2>Obteniendo ya Creando Proyectos</h2>
+  <h2>Obtener y Crear  Proyectos</h2>
   <div class="block">
     <p>
-    Para hacer cualquier cosa en Git, es necesario tener localmente un repositorio
-      Git. Es donde Git almacena los datos de los snapshots que guardamos.
+    Para  cualquier cosa que se quiera hacer en Git, es necesario obtener un repositorio
+    Git. Es donde Git almacena los datos de los snapshots que salvaguardamos.
     </p>
 
     <p>
-    Principalmente hay  dos formas de obtener un repositorio Git. Una es implemente
-      inicializando un nuevo repositorio en un directorio existente, ya sea o
-      un proyecto nuevo o un proyecto existente que se a&ntilde;ade al sistema de
-      control de c&oacute;digo fuente. La segunda forma es clonarlo desde un repositorio
-      Git p&uacute;blico,
-      lo que har&iacute;amos si quisi&eacute;ramos una copia o quisi&eacute;ramos trabajar con
-      otra gente en alg&uacute;n proyecto. Cubriremos ambos sistemas a continuaci&oacute;n.
+    Hay dos formas principales de obtener un repositorio Git. Una de ellas consiste
+    tan s&oacute;lo en inicialiar un nuevo repositorio en un directorio ya existente,
+    ya sea  para un  proyecto nuevo o un proyecto que se quiere a&ntilde;adir al
+    sistema de control de c&oacute;digo fuente. Otra forma es clonarlo desde un
+    repositorio Git p&uacute;blico, que es lo que har&iacute;amos si quisi&eacute;ramos
+    una copia o quisieramos trabajar en alg&uacute;n proyecto colaborativo. Ambos
+    sistemas ser&aacute;n cubiertos en este apartado.
     </p>
   </div>
 </div>
@@ -33,43 +32,45 @@ layout: reference
   </h2>
 
   <div class="block">
-    Para crear un repositorio desde un directorio existente (que puede contener 
-       ficheros), simplemente ejecutamos  <code>git
-      init</code> en ese directorio. Por ejemplo, digamos que tenemos un directorio
-      conteniendo unos pocos ficheros, como este:
+    Para crear un repositorio desde un directorio ya existente, simplemente ejecutamos 
+    <code>git init</code> en ese directorio. Por ejemplo, supongamos que tenemos un 
+    directorio que contiene algunos ficheros, como este:
 
-      <pre>
+<pre>
 <b>$ cd konichiwa</b>
 <b>$ ls</b>
 README   hello.rb
 </pre>
 
-    Es un proyecto en el que estamos escribiendo ejemplos del &quot;Hello World&quot; en todos
-    los lenguajes.  Hasta ahora, s&oacute;lo hemos usado Ruby, pero bueno, es un comienzo.
-    Para empezar el control de versiones de este proyecto con Git, simplemente ejecutamos    <code>git
-    init</code>.
+    Se trata de un proyecto en el que estamos escribiendo ejemplos del programa &quot;Hello
+    World&quot; en todos los lenguajes
+    de programaci&oacute;n. Hasta ahora, 
+    s&oacute;lo hemos usado Ruby, pero bueno, es tan s&oacute;lo un comienzo. 
+    Para iniciar el control de versiones de este proyecto con Git, simplemente
+    ejecutamos <code>git init</code>.
 
     <pre>
 <b>$ git init</b>
 Initialized empty Git repository in /opt/konichiwa/.git/
 </pre>
 
-    Observaremos que ahora hay un subdirectorio  <code>.git</code> en nuestro proyecto.
-    Es nuestro propio repositorio Git donde todos los datos de los snapshots del
-    proyecto son almacenados..
+    Ahora podemos observar que hay  subdirectorio  <code>.git</code> en
+    nuestro proyecto. Se trata de nuestro propio repositorio Git donde todos los
+    datos de los snapshots del proyecto ser&aacute;n almacenados.
 
-    <pre>
+<pre>
 <b>$ ls -a</b>
 .        ..       .git     README   hello.rb
 </pre>
 
-    Enhorabuena, ahora tenemos un esqueleto de repositorio Git, y  podemos
-    empezar a crear snapshots de nuestro proyecto.
+    Enhorabuena, ya tenemos el esqueleto de nuestro repositorio  Git y puede comenzar
+    la creaci&oacute;n de los  snapshots de nuestro proyecto.
 
     <p class="nutshell">
-    <strong>En definitiva,</strong>, usamos <code>git init</code> para hacer que
-    el contenido  de un directorio exista en un nuevo repositorio Git. Podemos hacer
-    esto en cualquier directorio y en cualquier momento, de forma completamente local.</p>
+    <strong>En resumidas cuentas</strong>, usamos <code>git init</code> para convertir
+    un  directorio y su contenido en un  nuevo repositorio Git. Esto se puede
+    hacer  en cualquier directorio y en cualquier momento, de forma totalmente
+    local.</p>
 
   </div>
 </div>
@@ -81,15 +82,14 @@ Initialized empty Git repository in /opt/konichiwa/.git/
       <a target="new" href="http://progit.org/book/ch2-1.html#cloning_an_existing_repository">book</a>
     </span>
     <a name="clone">git clone</a>
-    <span class="desc">copia un repositorio git para agregarle cosas nuevas</span>
-  </h2>
+    <span class="desc">copia un repositorio git </span>para su ampliación</h2>
   <div class="block">
-    <p>
-    Si necesitamos colaborar con gente en un proyecto, o si queremos obtener una
-      copia de un proyecto para ver o usar el c&oacute;digo, tendremos que clonarlo. Simplemente
-      ejecutamos el comando <code>git
-      clone [url]</code> con la URL del proyecto que queremos copiar.
-    </p>
+  <p>
+  Si necesitamos colaborar con otra gente en un proyecto, o queremos obtener
+  una copia de un proyecto de forma que podamos explorar o usar su c&oacute;digo
+  fuente, será necesario clonarlo. Simplemente ejecutamos el comando <code>git
+  clone [url]</code> con la URL del proyecto que queremos copiar.
+  </p>
 
 <pre>
 <b>$ git clone git://github.com/schacon/simplegit.git</b>
@@ -105,11 +105,12 @@ README   Rakefile <span class="blue">lib</span>
 </pre>
 
     <p>
-    Esto copiar&aacute; el hist&oacute;rico completo de ese proyecto para tenerlo de forma local
-      y proporcionar&aacute; un directorio de trabajo (working directory) de la rama (branch)
-      principal de ese proyecto, de forma que podamos ver su c&oacute;digo o empezar a modificarlo.
-      Si accedemos al nuevo directorio, podremos ver el subdirectorio <code>.git</code>      -
-      que es donde est&aacute;n todos los datos del proyecto.
+    Esto copiar&aacute; el hist&oacute;rico completo de ese proyecto para tenerlo
+    de forma local y proporcionar&aacute; un directorio de trabajo (working directory)
+    de la rama (branch) principal de ese proyecto, de forma que podamos explorar
+    su c&oacute;digo o empezar a modificarlo. Si accedemos a este nuevo directorio, 
+    podremos ver el subdirectorio <code>.git</code> - que es donde est&aacute;n todos
+    los datos del proyecto.
     </p>
 
 <pre>
@@ -123,18 +124,18 @@ config      index       <span class="blue">objects</span>
 </pre>
 
     <p>
-    Por defecto, Git crea un directorio con el mismo nombre que el proyecto en la
-      URL proporcionada - b&aacute;sicamente cualquier cosa que siga a la &uacute;ltima barra de
-      la URL. Para usar un nombre diferente, simplemente se a&ntilde;ade justo al final
-      del comando despues de la URL.
+    Por defecto, Git crea un directorio con el mismo nombre que el proyecto de la
+    URL proporcionada - b&aacute;sicamente cualquier cosa que siga a la &uacute;ltima
+    barra de la URL. Para usar un nombre diferente, simplemente se a&ntilde;ade
+    como un argumento al final del comando, despues de la URL.
     </p>
 
     <p class="nutshell">
-    <strong>En definitiva,</strong> usamos  <code>git clone</code> para obtener una
-    copia local de un repositorio Git de forma que podamos examinarlo o empezar a
-    modificarlo.</p>
+    <strong>En resumidas cuentas</strong>, usamos  <code>git clone</code> para obtener
+    una copia local de un repositorio Git, de forma que se pueda explorar o empezar
+    a modificarlo.</p>
 
   </div>
 </div>
 
-<p><a href="/basic">Sobre el  Snapshotting b&aacute;sico &#187;</a></p>
+<p><a href="/basic">Sobre el Snapshotting B&aacute;sico &#187;</a></p>

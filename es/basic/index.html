@@ -1,7 +1,6 @@
 ---
 layout: reference
 ---
-
 <div class="box">
   <h2>
     <span class="docs">
@@ -11,27 +10,28 @@ layout: reference
   </h2>
   <div class="block">
     <p>
-    Git is all about composing and saving snapshots of your project and then
-    working with and comparing those snapshots.  This section will explain
-    the commands needed to compose and commit snapshots of your project.
+    En Git todo consiste en crear y guardar snapshots de nuestro proyecto, para desp&uacute;es
+    trabajar con estos snapshots o compararlos unos con otros. Este apartado decribe los comandos
+    necesarios para construir y grabar (commit) los snapshots de nuestro proyecto.
     </p>
-
     <p>
-    An important concept here is that Git has an 'index', which acts as sort
-    of a staging area for your snapshot.  This allows you to build up a series
-    of well composed snapshots from changed files in your working directory, 
-    rather than having to commit all of the file changes at once.
+    Un concepto importante del snapshotting es que Git mantiene un '&iacute;ndice',
+    que act&uacute;a como una especie de &aacute;rea de montaje (staging area) de nuestro
+    snapshot. Esto nos permite acumular una serie de instantaneas bien construidas
+    desde los ficheros modificados en nuestro directorio de trabajo (working directory),
+    en lugar de tener que realizar de golpe el commit de todos los cambios de los ficheros.
     </p>
 
     <p class="nutshell">
-    <strong>In a nutshell</strong>, you will use <code>git add</code> to start tracking new
-    files and also to stage changes to already tracked files, then 
-    <code>git status</code> and <code>git diff</code> to see what has been
-    modified and staged and finally <code>git commit</code> to record your
-    snapshot into your history.  This will be the basic workflow that you use
-    most of the time.
+    <strong>En resumidas cuentas</strong>, usaremos <code>git add</code> para comenzar
+    con el seguimiento (tracking) de nuevos ficheros, pero tambi&eacute;n para
+    a&ntilde;adir (stage) al &aacute;rea de montaje  nuevos cambios en ficheros que ya 
+    se hab&iacute;an a&ntilde;adido, despu&eacute;s usaremos <code>git status</code> y 
+    <code>git diff</code> para examinar lo que ha sido modificado y organizado en el 
+    &aacute;rea de montaje, y  finalmente usaremos <code>git commit</code> para realizar
+    la grabaci&oacute;n de nuestro  snapshot en el historial. Este ser&aacute; el flujo 
+    de trabajo b&aacute;sico que estaremos utilizando la mayor parte del tiempo.
     </p>
-
   </div>
 </div>
 
@@ -42,59 +42,68 @@ layout: reference
       <a target="new" href="http://progit.org/book/ch2-2.html#tracking_new_files">book</a>
     </span>
     <a name="add">git add</a>
-    <span class="desc">adds file contents to the staging area</span>
+    <span class="desc">a&ntilde;ade el contenido de los ficheros al &aacute;rea de montaje</span>
   </h2>
 
   <div class="block">
     <p>
-    In Git, you have to add file contents to your staging area before you 
-    can commit them.  If the file is new, you can run <code>git add</code>
-    to initially add the file to your staging area, but even if the file
-    is already "tracked" - ie, it was in your last commit - you still need
-    to call <code>git add</code> to add new modifications to your staging
-    area. Let's see a few examples of this.
+    En Git tenemos que a&ntilde;adir los ficheros a nuestro staging area (&aacute;rea
+    de montaje)  antes de que se pueda realizar su commit (grabarlos en un snapshot).
+    Si se trata de un fichero  nuevo podemos ejecutar <code>git add</code> para a&ntilde;adirlo
+    por primera vez al staging area, pero incluso cuando el fichero ya lo tenemos &quot;bajo
+    seguimiento&quot; (tracked) -  si por
+    ejemplo estaba en nuestro &uacute;ltimo commit - ser&aacute; igualmente necesario
+    ejecutar 
+    <code>git add</code> para  a&ntilde;adir las nuevas modificaciones del fichero
+    al staging area.  Veamos algunos ejemplos de esto.
     </p>
-
-    <p>Going back to our Hello World example, once we've initiated the project,
-    we would now start adding our files to it and we would do that with 
-    <code>git add</code>.  We can use <code>git status</code> to see what the
-    state of our project is.
+   
+    <p>
+    Volviendo a nuestro ejemplo Hello World, una vez que hemos inicializado el projecto
+    empezar&iacute;amos a a&ntilde;adir nuestros ficheros y lo har&iacute;amos con
+    <code>git add</code>. Podemos usar <code>git status</code> para ver en que estado
+    está 
+    nuestro proyecto.
     </p>
-
+  
 <pre>
 <b>$ git status -s</b>
 <span class="red">??</span> README
 <span class="red">??</span> hello.rb
 </pre>
 
-    So right now we have two untracked files.  We can now add them.
+    En este momento tenemos dos ficheros que no est&aacute;n bajo seguimiento
+    (untracked files). Pero podemos a&ntilde;adirlos al staging area.
 
-<pre>
+    <pre>
 <b>$ git add README hello.rb</b>
 </pre>
     
-    Now if we run <code>git status</code> again, we'll see that they've been
-    added.
-
-<pre>
+    Si ahora ejecutamos de nuevo <code>git status</code>, veremos como han sido a&ntilde;adidos.
+    <pre>
 <b>$ git status -s</b>
 <span class="green">A</span>  README
 <span class="green">A</span>  hello.rb
 </pre>
 
     <p class="aside">
-    It is also common to recursively add all files in a new project by specifying
-    the current working directory like this: <code>git add .</code>.  Since Git
-    will recursively add all files under a directory you give it, if you give it
-    the current working directory, it will simply start tracking every file 
-    there.  In this case, a <code>git add .</code> would have done the same 
-    thing as a <code>git add README hello.rb</code>, or for that matter so would
-    <code>git add *</code>, but that's only because we don't have subdirectories
-    which the <code>*</code> would not recurse into.
+    Tambi&eacute;n es habitual añadir recursivamente todos los ficheros de un nuevo
+    proyecto especificando el directorio de trabajo actual como por ejemplo con <code>git
+    add .</code>. Es decir, Git a&ntilde;adir&aacute; recursivamente todos los ficheros
+    que est&eacute;n dentro del directorio entregado como parametro en el
+    <code>git add</code>, si le entregamos el directorio de trabajo actual, Git 
+    sencillamente empezar&aacute; el seguimiento (tracking) de todos los ficheros
+    en este directorio. En este ejemplo, un <code>git add .</code> estar&iacute;a
+    haciendo lo mismo que un  <code>git add README hello.rb</code>, y en este caso
+    en particular tambi&eacute;n podr&iacute;amos hacer <code>git add *</code>, pero
+    s&oacute;lo porque  no tenemos subdirectorios en los que el <code>*</code> pueda
+    entrar y a&ntilde;adir de forma recursiva.
     </p>
 
-    <p>OK, so now if we edit one of these files and run <code>git status</code>
-    again, we will see something odd.</p>
+    <p>
+    Pues bi&eacute;n, si ahora editamos uno de estos ficheros y ejecutamos <code>git
+    status</code> de nuevo, nos encontraremos algo extra&ntilde;o.
+    </p>
 <pre>
 <b>$ vim README</b>
 <b>$ git status -s</b>
@@ -102,29 +111,37 @@ layout: reference
 <span class="green">A</span>  hello.rb
 </pre>
 
-    <p>The 'AM' status means that the file has been modified on disk since we
-    last added it.  This means that if we commit our snapshot right now, we will
-    be recording the version of the file when we last ran <code>git add</code>,
-    not the version that is on our disk.  Git does not assume that what the file
-    looks like on disk is necessarily what you want to snapshot - you have to
-    tell Git with the <code>git add</code> command.
+    <p>
+    El estado 'AM' significa que los ficheros han sido modificados en el disco desde
+    la &uacute;ltima vez que fueron añadidos (al staging area). Lo que significa
+    que si ahora mismo hicieramos un commit para crear nuestro snapshot, estar&iacute;amos
+    grabando la versi&oacute;n del fichero que ten&iacute;amos la &uacute;ltima vez
+     que ejecutamos el <code>git add</code>, y no la versi&oacute;n que tenemos en
+     nuestro disco. Git no asume que el fichero tal y como est&aacute; en el disco
+     es lo que queremos a&ntilde;adir a nuestro  snapshot - tenemos que decirselo
+     con el comando <code>git add</code>
+    (aunque ya estubiera a&ntilde;adido).
+    </p>
+      
+    <p class="nutshell"><strong>En resumidas cuentas</strong>, 
+    ejecutamos  <code>git add</code> en un fichero cuando queremos incluir en el
+    siguiente snapshot - que guardemos con el commit - cualquier cambio que hayamos
+    realizado en dicho fichero. Cualquier cosa que cambiemos en un fichero y que
+    no se haya a&ntilde;adido
+    con un 
+    <code>git add</code> no ser&aacute; inclu&iacute;da en el snapshot - lo que significa
+     que podemos elaborar nuestros snapshots con un algo de m&aacute;s precisi&oacute;n
+    que con la mayor&iacute;a de los sistemas SCM.
     </p>
 
-    <p class="nutshell">
-    <strong>In a nutshell</strong>, 
-    you run <code>git add</code> on a file when you want to 
-    include whatever changes you've made to it in your next commit snapshot.
-    Anything you've changed that is not added will not be included - this means
-    you can craft your snapshots with a bit more precision than most other SCM
-    systems.</p>
-
-    <p>For a very interesting example of using this flexibility to stage only
-    parts of modified files at a time, see the '-p' option to 
-    <code>git add</code> in the Pro Git book.</p>
-
-
+    <p>
+    Para un ejemplo bastante interesante de como usar esta flexibilidad de a&ntilde;adir
+      al area de montaje (stage) s&oacute;lo partes de ficheros modificados a la vez,  consultar
+      la opci&oacute;n
+      '-p' de <code>git
+      add</code> del libro Pro Git.
+    </p>
   </div>
-
 </div>
 
 <div class="box">
@@ -748,4 +765,3 @@ M hello.rb
 </div>
 
 <p><a href="/branching">On to Branching and Merging &#187;</a></p>
-
