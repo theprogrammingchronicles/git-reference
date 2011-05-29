@@ -1,0 +1,123 @@
+---
+layout: es_reference
+---
+<div class="box">
+  <h2>Introducción a la Gu&iacute;a de Referencia de Git</h2>
+  <div class="block">
+    <p>
+    Este es el sitio web de la Gu&iacute;a de Referencia de Git. La finalidad  de
+    este sitio web es servir como gu&iacute;a de referencia r&aacute;pida para el
+    aprendizaje y repaso de los comandos m&aacute;s importantes y m&aacute;s ampliamente
+    utilizados de Git. Esta gu&iacute;a est&aacute; organizada en apartados que agrupan
+    los diferentes tipos de tareas a realizar, y que muestran las opciones y comandos
+     habitualmente utilizados para llevar a cabo dichas tareas comunes. 
+    </p>
+    <p>
+    Cada apartado contendr&aacute; un enlace al subsiguiente apartado, de forma
+    que la gu&iacute;a pueda ser utilizada como un tutorial. Cada p&aacute;gina
+    tambi&eacute;n incluir&aacute; enlaces a documentaci&oacute;n m&aacute;s exhaustiva
+    de Git, tales como las p&aacute;ginas correspondientes del manual oficial de
+    Git o apartados relevantes del libro  <a href="http://progit.org">Pro Git</a>, para 
+    que se pueda ampliar el estudio de cualquiera de los comandos. &nbsp;En primer lugar
+    empezaremos con unas reflexiones sobre c&oacute;mo realiza Git la gesti&oacute;n del
+    c&oacute;digo fuente.
+    </p>
+  </div>
+</div>
+
+<div class="box">
+  <h2>C&oacute;mo pensar como Git</h2>
+  <div class="block">
+    <p>
+    El primer concepto que es importante  entender acerca de Git es que 
+    su forma de pensar sobre el control de versiones es muy diferente a 
+    como lo hace Subversion, Perforce o cualquier otro SCM que se pueda estar
+    usando. En general es m&aacute;s f&aacute;cil aprender Git si intentamos
+    olvidar todas nuestras suposiciones previas sobre como funciona 
+    el control de versiones y tratar de pensar de la misma forma que lo hace 
+    Git.
+    </p>
+       
+		<p>
+    Vamos a empezar desde cero. Supongamos que estamos dise&ntilde;ando un 
+    nuevo sistema de gesti&oacute;n de c&oacute;digo fuente. &iquest;C&oacute;mo
+    realiz&aacute;bamos el control de versiones antes de que usaramos herramientas
+    para esto? Es bastante probable que simplemente nos limitemos a hacer  una
+    copia del directorio completo de nuestro proyecto, para salvaguardar lo que
+    tengamos en este punto del desarrollo.
+    </p>
+       
+    <pre> $ cp -R project project.bak </pre>
+    
+    <p>
+    De esta forma podremos revertir f&aacute;cilmente cualquier  fichero que
+    m&aacute;s tarde hayamos arruinado, o podremos examinar los cambios que hemos
+    realizado mediante la comparaci&oacute;n del estado actual del proyecto con el 
+    estado que mostraba en el momento de la copia. </p>
+
+    <p>
+    Si somos realmente paranoicos, podr&iacute;amos hacer esta copia de forma
+    peri&oacute;dica, incluso a&ntilde;adiendo la fecha al nombre de cada copia
+    de seguridad:
+    </p>
+
+    <pre> $ cp -R project project.2010-06-01.bak </pre>
+
+    <p>
+    En ese caso, es posible que acumulemos un mont&oacute;n de im&aacute;genes
+    del proyecto (snapshots) desde las que se pueden realizar tareas de inspecci&oacute;n
+    y comparaci&oacute;n. Podr&iacute;amos incluso usar este modelo como una forma bastante eficaz
+    de compartir cambios con otra gente. Si empaquetamos el proyecto en un estado
+    concreto y lo publicamos en nuestro sitio web, otros desarrolladores pueden descargarselo,
+    modificarlo y enviarnos de vuelta un parche de una forma bastante sencilla.
+    </p>
+
+    <pre>
+     $ wget http://sample.com/project.2010-06-01.zip
+     $ unzip project.2010-06-01.zip
+     $ cp -R project.2010-06-01 project-my-copy
+     $ cd project-my-copy
+     $ (change something)
+     $ diff project-my-copy project.2010-06-01 > change.patch
+     $ (email change.patch)
+ 		</pre>
+
+    <p>
+    Ahora el desarrollador inicial puede   aplicar este parche a su copia del
+    proyecto y as&iacute; conseguir los cambios realizados. <b>Esta
+    es precisamente la forma en la que muchos proyectos open source han estado
+    colaborando durante a&ntilde;os.</b>
+    </p>
+
+    <p>
+    Lo cierto es que este sistema funciona bastante bien, as&iacute; que digamos
+    que queremos crear una herramienta que realice este proceso b&aacute;sico de una forma
+    m&aacute;s r&aacute;pida y sencilla. En lugar de crear una herramienta que versione 
+    cada fichero de forma individual, como hace Subversion, seguramente inventar&iacute;amos 
+    una herramienta que permitiera crear y almacenar de forma mas sencilla las instant&aacute;neas
+    de nuestro proyecto (snaphots), sin necesidad de copiar el directorio completo
+    cada vez.
+    </p>
+
+    <p>
+    Esto es lo que fundamentalmente hace Git. Le decimos a Git que queremos guardar
+    un snapshot de nuestro proyecto usando  el comando <code>git commit</code> y
+    b&aacute;sicamente graba un manifiesto o declaraci&oacute;n del estado que muestran
+    todos los ficeros del proyecto en ese punto. La mayor&iacute;a de los comandos trabajan
+    con estos manifiestos para ver en qu&eacute; difieren unos de otros, extraer el contenido
+    de &eacute;stos, etc.  
+    </p>
+
+    <center><img src="./images/snapshots.png"/></center>
+
+    <p>
+    <b>Si piensas en Git como una herramienta para almacenar, comparar
+      y mezclar instant&aacute;neas de tu proyecto (snapshots)</b>, ser&aacute; m&aacute;s
+      f&aacute;cil entender lo que est&aacute; sucediendo realmente y como hacer las cosas
+      de la manera m&aacute;s apropiada.
+    </p> 
+
+  </div>
+</div>
+
+<p><a href="/creating">Sobre Obtener y Crear Proyectos &#187;</a></p>
