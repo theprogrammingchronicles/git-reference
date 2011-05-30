@@ -2,71 +2,68 @@
 layout: reference
 ---
 <div class="box">
-  <h2>Introducción a la Referencia de Git</h2>
+  <h2>Introduction to the Git Reference</h2>
   <div class="block">
     <p>
-    Este es el sitio web de la Referencia de Git. La intención de este
-    sitio es servir como una guía rápida de referencia para el aprendizaje
-    y recordatorio de los comandos de Git más importantes y más com&uacute;nmente
-    utilizados. Los comandos están organizados en secciones seg&uacute;n el tipo
-    de operaci&oacute;n  a llevar a cabo. Se presentan las 
-    opciones y comandos utilizados para llevar a cabo estas tareas comunes.
+    This is the Git reference site. This is meant to be a quick
+    reference for learning and remembering the most important and
+    commonly used Git commands.  The commands are organized into
+    sections of the type of operation you may be trying to do, and
+    will present the common options and commands needed to accomplish
+    these common tasks.
     </p>
     <p>
-    Cada sección contiene un enlace a la siguiente, de esta forma
-    puede ser utilizado como un tutorial. Cada página también incluye
-    enlaces a documentación más exhaustiva de Git, tales como las 
-    páginas del manual oficial y las secciones relacionadas del libro
-    <a href="http://progit.org">Pro Git book</a>, donde se puede
-    encontrar más información de cualquiera de los comandos. En primer lugar,
-    empezaremos por plantear algunas ideas sobre como Git realiza la
-    gestión del código fuente.
+    Each section will link to the next section, so it can be used
+    as a tutorial.  Every page will also link to more in-depth
+    Git documentation such as the offical manual pages and relevant
+    sections in the <a href="http://progit.org">Pro Git book</a>, 
+    so you can learn more about any of 
+    the commands. First, we'll start with thinking about source code 
+    management like Git does.
     </p>
   </div>
 </div>
 
 <div class="box">
-  <h2>C&oacute;mo pensar como Git</h2>
+  <h2>How to Think Like Git</h2>
   <div class="block">
-    <p>El primer concepto que es importante  entender acerca de Git es que 
-       su forma de pensar sobre el control de versiones es muy diferente a 
-       como lo hace Subversion, Perforce o cualquier otro SCM que se pueda estar
-       usando. Normalmente es m&aacute;s f&aacute;cil aprender Git si intentamos
-        olvidar todas nuestras suposiciones previas sobre como funciona 
-       el control de versiones y tratar de pensar de la misma forma que lo hace 
-    Git.</p>
-       
-		<p>Vamos a empezar desde cero. Supongamos que estamos dise&ntilde;ando un 
-       nuevo sistema de gesti&oacute;n de c&oacute;digo fuente. &iquest;C&oacute;mo
-        realiz&aacute;bamos el control de versiones antes de que usaramos herramientas para
-       esto? Es muy probable que simplemente realizaramos una copia del 
-       directorio completo de nuestro proyecto para salvar lo que ten&iacute;amos
-       en este punto del desarrollo. </p>
-       
-    <pre> $ cp -R project project.bak </pre>
-    
     <p>
-    De esta forma, se podr&aacute;n revertir f&aacute;cilmente los  ficheros que
-    acaben estrope&aacute;ndose m&aacute;s tarde, o revisar los cambios realizados
-    mediante la comparaci&oacute;n del estado actual del proyecto con el estado que
-    mostraba en el momento de la copia. </p>
+    This first thing that is important to understand about Git is
+    that it thinks about version control very differently than 
+    Subversion or Perforce or whatever SCM you may be used to. It
+    is often easier to learn Git by trying to forget your assumptions
+    about how version control works and try to think about it in the
+    Git way.
+    </p>
 
     <p>
-    Para los realmente paranoicos, podemos hacer esto de forma peri&oacute;dica,
-    quiz&aacute;s
-    poniendo la fecha en el nombre del backup:
+    Let's start from scratch.  Assume you are designing a new source 
+    code management system.  How did you do basic version control before
+    you used a tool for it?  Chances are that you simply copied your 
+    project directory to save what it looked like at that point.
+    </p>
+
+    <pre> $ cp -R project project.bak </pre>
+
+    <p>
+    That way, you can easily revert files that get messed up later, or 
+    see what you have changed by comparing what the project looks like
+    now to what it looked like when you copied it.
+    </p>
+
+    <p>
+    If you are really paranoid, you may do this often, maybe putting the
+    date in the name of the backup:
     </p>
 
     <pre> $ cp -R project project.2010-06-01.bak </pre>
 
     <p>
-    En ese caso, podr&iacute;amos acabar con un mont&oacute;n de im&aacute;genes
-    (o snapshots) del proyecto, los cuales podemos usar para comparaci&oacute;n o
-    revisi&oacute;n. Incluso podemos
-    usar este modelo de una manera bastante eficaz para compartir los cambios con
-    otra gente. Si empaquetamos el proyecto en un momento dado con un estado concreto
-    y lo ponemos en nuestro sitio web, otros desarrolladores pueden descargarselo,
-    modificarlo y enviarnos de vuelta un parche de forma muy sencilla.
+    In that case, you may have a bunch of snapshots of your project that 
+    you can compare and inspect from. You can even use this model to 
+    fairly effectively share changes with someone.  If you zip up your
+    project at a known state and put it on your website, other developers
+    can download that, change it and send you a patch pretty easily.
     </p>
 
     <pre>
@@ -79,40 +76,37 @@ layout: reference
  $ (email change.patch)</pre>
 
     <p>
-    El desarrollador original ahora puede aplicar ese parche a su copia del proyecto
-      y de esta forma obtener los cambios recibidos. <b>Esta es precisamente la forma
-      en la que muchos proyectos open source han estado colaborando durante a&ntilde;os.</b>
+    Now the original developer can apply that patch to their copy of the
+    project and they have your changes. This is how many open source 
+    projects have been collaborated on for several years.
     </p>
 
     <p>
-    La verdad es que este sistema funciona bastante bien, as&iacute; que supongamos 
-      que queremos crear una herramienta para realizar este proceso de una forma
-      m&aacute;s r&aacute;pida y sencilla. En lugar de dise&ntilde;ar una herramienta que versione 
-      cada fichero de forma individual, como Subversion, probablemente creariamos
-      una que hiciera m&aacute;s sencilla la creaci&oacute;n y almacenamiento de las instant&aacute;neas
-      (snaphots) de nuestro proyecto, sin tener que estar copiando cada vez el directorio
-      completo.
+    This actually works fairly well, so let's say we want to write a tool
+    to make this basic process faster and easier.  Instead of writing a tool
+    that versions each file individually, like Subversion, we would probably
+    write one that makes it easier to store snapshots of our project without
+    having to copy the whole directory each time.
     </p>
 
     <p>
-    Esencialmente esto es lo que hace Git. Le decimos a Git que queremos guardar
-      un snapshot de nuestro proyecto usando  el comando <code>git
-      commit</code> y b&aacute;sicamente se graba un manifiesto o declaraci&oacute;n del estado
-      que presentaban todos los ficeros del proyecto en ese punto. La mayor&iacute;a de
-      los comandos trabajan con esos manifiestos para ver como difieren unos de otros,
-      extraer el contenido de estos, y otras operaciones.  
+    This is essentially what Git is. You tell Git you want to save a snapshot
+    of your project with the <code>git commit</code> command and it basically 
+    records a manifest of what all of the files in your project look like at 
+    that point.  Then most of the commands work with those manifests to see
+    how they differ or pull content out of them, etc.  
     </p>
 
     <center><img src="./images/snapshots.png"/></center>
 
     <p>
-    <b>Si piensas en Git como una herramienta para el almacenamiento, comparaci&oacute;n
-      y mezcla de snapshots (o instantaneas) de tu proyecto</b>, ser&aacute; m&aacute;s
-      f&aacute;cil entender como est&aacute; funcionando y como hacer las cosas de
-      la manera m&aacute;s apropiada.
-    </p> 
+    If you think about Git
+    as a tool for storing and comparing and merging snapshots of your project,
+    it may be easier to understand what is going on and how to do things 
+    properly.
+    </p>
 
   </div>
 </div>
 
-<p><a href="/creating">Sobre Obtener y Crear Proyectos &#187;</a></p>
+<p><a href="/creating">On to Getting and Creating Projects &#187;</a></p>
